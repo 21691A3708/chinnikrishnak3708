@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import HomePage from './components/HomePage';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          WElcome to My Profile
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      {/* Navigation Menu */}
+      <nav className="navbar navbar-expand-sm navbar-light bg-light p-3">
+        <div className="container-fluid">
+          <Link className="navbar-brand" to="/chinnikrishnak3708">Home</Link>
+          <Link className="nav-link" to="/about">About</Link>
+        </div>
+      </nav>
+
+      {/* Routes */}
+      <Routes>
+        <Route path="/chinnikrishnak3708" element={<HomePage />} />
+        <Route path="/about" element={<div>About Page</div>} />
+      </Routes>
+    </Router >
   );
 }
 
