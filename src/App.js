@@ -17,7 +17,9 @@ function App() {
       {/* Routes */}
       <Routes>
         <Route path="/chinnikrishnak3708" element={<HomePage />} />
-        <Route path="/about" element={<div>About Page</div>} />
+        <Route path="/about" element={<div>About Page
+          <h4 className='text text-center text-info f-3'>Updating soon</h4>
+        </div>} />
       </Routes>
     </Router >
   );
