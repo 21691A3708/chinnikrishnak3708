@@ -3,11 +3,12 @@ import React from "react";
 function HomePage() {
     return (
         <>
-            <div className="container-full mt-4 bg-danger p-4 rounded text-white text-center justify-content-center d-flex flex-column box-shadow rounded-pill"
-                style={{ minHeight: '80vh', width: '100%' }}>
-                <h1>Welcome to the K. Chinni Krishna.</h1>
-                <p>This is the main landing page of the application.</p>
-            </div>
+            <section className="container-full mt-4 bg-danger p-4 rounded text-white text-center justify-content-center d-flex flex-column" style={{ minHeight: '80vh', width: '100%' }}>
+                <div className="rounded-pill w-75">
+                    <h1>Welcome to the K. Chinni Krishna.</h1>
+                    <p>This is the main landing page of the application.</p>
+                </div>
+            </section>
             <div>
                 <h2 className="text-center mt-4">About Me</h2>
                 <p className="text-center">I am K. Chinni Krishna, a passionate developer with expertise in React and web development.</p>
@@ -68,7 +69,7 @@ function HomePage() {
                 <a href="https://www.linkedin.com/in/chinnikrishna3708/" target="_blank" rel="noopener noreferrer" className="mx-2 text-decoration-none text-primary">LinkedIn</a>
             </section >
             <footer className="bg-light text-center p-3">
-                <p>&copy; 2024 K. Chinni Krishna. All rights reserved.</p>
+                <p>&copy; 2025 K. Chinni Krishna. All rights reserved.</p>
             </footer>
 
         </>
