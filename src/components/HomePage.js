@@ -1,13 +1,43 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
 function HomePage() {
+    const fullText = "K. Chinni Krishna";
+    const [displayText, setDisplayText] = useState("");
+    useEffect(() => {
+        let isCancelled = false;
+
+        async function typeWriter() {
+            while (!isCancelled) {
+                // Reset before typing starts
+                setDisplayText("");
+
+                // Type one character at a time
+                for (let i = 0; i < fullText.length; i++) {
+                    if (isCancelled) return;
+                    setDisplayText((prev) => prev + fullText[i]);
+                    await new Promise((resolve) => setTimeout(resolve, 200)); // 200ms per character
+                }
+
+                // Wait before restarting
+                await new Promise((resolve) => setTimeout(resolve, 1000));
+            }
+        }
+
+        typeWriter();
+
+        return () => {
+            isCancelled = true; // cleanup on unmount
+        };
+    }, []);
     return (
         <>
-            <section className="container-full mt-4 bg-danger p-4 rounded text-white text-center justify-content-center d-flex flex-column" style={{ minHeight: '80vh', width: '100%' }}>
-                <div className="rounded-pill w-75">
-                    <h1>Welcome to the K. Chinni Krishna.</h1>
-                    <p>This is the main landing page of the application.</p>
+            <section className="container-full mt-4  p-4 rounded text-white text-center justify-content-center d-flex flex-column" >
+                <div className="rounded-circle bg-danger">
+                    <h1>Welcome to the {displayText}</h1>
+                    <div className="w-100 h-25">
+                        <p>This is the main landing page of the application.</p>
+                    </div>
                 </div>
+
             </section>
             <div>
                 <h2 className="text-center mt-4">About Me</h2>
@@ -30,7 +60,7 @@ function HomePage() {
             </div>
             <div>
                 <h2 className="text-center mt-4">Skills</h2>
-                <ul className="list-group list-group-flush text-center col-6 offset-3 mb-4 d-flex flex-row flex-wrap">
+                <ul className="list-group list-group-flush text-center col-6 offset-3 mb-4 d-flex flex-row flex-wrap" >
                     <li className="list-group-item">React</li>
                     <li className="list-group-item">JavaScript</li>
                     <li className="list-group-item">HTML/CSS</li>
@@ -41,23 +71,23 @@ function HomePage() {
                     <li className="list-group-item">Team Collaboration</li>
                     <li className="list-group-item">UI/UX Design Principles</li>
                     <li className="list-group-item">RESTful APIs</li>
-                    <li className="list-group-item">Version Control</li>
+                    {/* <li className="list-group-item">Version Control</li>
                     <li className="list-group-item">Debugging & Testing</li>
                     <li className="list-group-item">Continuous Learning</li>
                     <li className="list-group-item">Time Management</li>
                     <li className="list-group-item">Communication Skills</li>
-                    <li className="list-group-item">Adaptability</li>
+                    <li className="list-group-item">Adaptability</li> */}
                     <li className="list-group-item">Creativity</li>
                     <li className="list-group-item">Project Management</li>
                     <li className="list-group-item">Critical Thinking</li>
                     <li className="list-group-item">Collaboration Tools (e.g., Slack, Trello)</li>
                     <li className="list-group-item">Performance Optimization</li>
-                    <li className="list-group-item">Web Accessibility Standards</li>
+                    {/* <li className="list-group-item">Web Accessibility Standards</li> */}
                     {/* <li className="list-group-item">Cloud Services (e.g., AWS, Firebase)</li> */}
                     <li className="list-group-item">Database Management (e.g., MongoDB, SQL)</li>
-                    <li className="list-group-item">WebSockets</li>
+                    {/* <li className="list-group-item">WebSockets</li>
 
-                    <li className="list-group-item">TypeScript</li>
+                    <li className="list-group-item">TypeScript</li> */}
                 </ul>
             </div>
             <section className="text-center mt-4 mb-4">
