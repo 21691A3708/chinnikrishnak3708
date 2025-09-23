@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-function HomePage() {
+function Index() {
     const fullText = "K. Chinni Krishna";
     const [displayText, setDisplayText] = useState("");
     useEffect(() => {
@@ -9,35 +9,62 @@ function HomePage() {
             while (!isCancelled) {
                 // Reset before typing starts
                 setDisplayText("");
-
                 // Type one character at a time
                 for (let i = 0; i < fullText.length; i++) {
                     if (isCancelled) return;
                     setDisplayText((prev) => prev + fullText[i]);
                     await new Promise((resolve) => setTimeout(resolve, 200)); // 200ms per character
                 }
-
                 // Wait before restarting
                 await new Promise((resolve) => setTimeout(resolve, 1000));
             }
         }
-
         typeWriter();
-
         return () => {
             isCancelled = true; // cleanup on unmount
         };
     }, []);
     return (
         <>
-            <section className="container-full mt-4  p-4 rounded text-white text-center justify-content-center d-flex flex-column" >
+
+            <header
+                className="d-flex justify-content-equaly align-items-center px-4"
+                style={{
+                    width: "100%",
+                    height: "10.9vh",
+                    backgroundColor: "rgba(79, 89, 163, 1)",
+                    color: "white",
+                }}
+            >
+                {/* Left Side - Logo/Heading */}
+                <h1 className="m-0" style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700 }}>
+                    Protipolia
+                </h1>
+
+                {/* Right Side - Navigation + Profile */}
+                <div className="d-flex align-items-center gap-4">
+                    <nav className="d-flex gap-3">
+                        <a href="#home" className="text-white text-decoration-none">
+                            Home
+                        </a>
+                        <a href="#about" className="text-white text-decoration-none">
+                            About
+                        </a>
+                        <a href="#services" className="text-white text-decoration-none">
+                            Services
+                        </a>
+                    </nav>
+
+                </div>
+            </header>
+
+            <section className="container-full mt-4  p-4 rounded text-white text-center justify-content-center d-flex flex-column" style={{ height: '89.1vh' }} >
                 <div className="rounded-circle bg-danger">
                     <h1>Welcome to the {displayText}</h1>
                     <div className="w-100 h-25">
                         <p>This is the main landing page of the application.</p>
                     </div>
                 </div>
-
             </section>
             <div>
                 <h2 className="text-center mt-4">About Me</h2>
@@ -107,4 +134,4 @@ function HomePage() {
     );
 }
 
-export default HomePage;
+export default Index;
