@@ -1,32 +1,41 @@
 import React, { useEffect, useState } from "react";
+const fullText = "K. Chinni Krishna";
 function Index() {
-    const fullText = "K. Chinni Krishna";
+
     const [displayText, setDisplayText] = useState("");
     useEffect(() => {
         let isCancelled = false;
+        let charIndex = 0;
+        let typing = true;
 
-        async function typeWriter() {
-            while (!isCancelled) {
-                // Reset before typing starts
-                setDisplayText("");
-                // Type one character at a time
-                for (let i = 0; i < fullText.length; i++) {
-                    if (isCancelled) return;
-                    setDisplayText((prev) => prev + fullText[i]);
-                    await new Promise((resolve) => setTimeout(resolve, 200)); // 200ms per character
+        function typeEffect() {
+            if (typing) {
+                setDisplayText(fullText.slice(0, charIndex + 1));
+                charIndex++;
+                if (charIndex === fullText.length) {
+                    typing = false;
+                    setTimeout(typeEffect, 1500); // Pause before deleting
+                    return;
                 }
-                // Wait before restarting
-                await new Promise((resolve) => setTimeout(resolve, 1000));
+            } else {
+                setDisplayText(fullText.slice(0, charIndex - 1));
+                charIndex--;
+                if (charIndex === 0) {
+                    typing = true;
+                }
             }
+            setTimeout(typeEffect, typing ? 80 : 50);
         }
-        typeWriter();
+
+        const timer = setTimeout(typeEffect, 1000); // Initial delay
+
         return () => {
-            isCancelled = true; // cleanup on unmount
+            clearTimeout(timer); // Cleanup
+            isCancelled = true;
         };
     }, []);
     return (
         <>
-
             <header
                 className="d-flex justify-content-equaly align-items-center px-4"
                 style={{
@@ -58,14 +67,31 @@ function Index() {
                 </div>
             </header>
 
-            <section className="container-full mt-4  p-4 rounded text-white text-center justify-content-center d-flex flex-column" style={{ height: '89.1vh' }} >
-                <div className="rounded-circle bg-danger">
-                    <h1>Welcome to the {displayText}</h1>
-                    <div className="w-100 h-25">
-                        <p>This is the main landing page of the application.</p>
+            <section
+                className="container-fluid rounded text-white d-flex flex-column flex-md-row"
+                style={{ minHeight: '89.1vh' }}
+            >
+                {/* Left Column */}
+                <div className="flex-fill d-flex flex-column align-items-center justify-content-center mb-3 mb-md-0">
+                    <div
+                        className="rounded-circle bg-danger d-flex flex-column align-items-center justify-content-center"
+                        style={{ width: '500px', height: '500px' }}
+                    >
+                        <h1 className="text-center">
+                            Welcome to<br />
+                            {displayText}
+                        </h1>
+                        <p className="mt-2 text-center">This is the main landing page of the application.</p>
                     </div>
                 </div>
+
+                {/* Right Column */}
+                <div className="flex-fill d-flex align-items-center justify-content-center bg-info rounded">
+                    <h1 className="text-center text-danger">Bottom half content Here</h1>
+                </div>
             </section>
+
+
             <div>
                 <h2 className="text-center mt-4">About Me</h2>
                 <p className="text-center">I am K. Chinni Krishna, a passionate developer with expertise in React and web development.</p>
