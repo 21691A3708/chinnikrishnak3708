@@ -1,219 +1,286 @@
-// // components/HeroSection.jsx
-// import React from "react";
+import React, { useState, useEffect } from "react";
+// import MyPhoto from "../assets/IMG_20250510_154235.jpg";
+import MyPhoto from "../assets/image_20142.jpg";
+// import MyPhoto from "../assets/thired photo.jpg";
 
-// const HeroSection = ({ displayText }) => {
-//   return (
-//     <section
-//       id="home"
-//       className="container-fluid text-white d-flex align-items-center"
-//       style={{
-//         minHeight: "100vh",
-//         background:
-//           "linear-gradient(135deg, #0D47A1 0%, #1976D2 50%, #42A5F5 100%)",
-//         paddingTop: "70px",
-//       }}>
-//       <div className="container">
-//         <div className="row align-items-center">
-//           <div className="col-md-6 text-center text-md-start">
-//             <h1 className="display-4 fw-bold mb-3" style={{ color: "#FFD700" }}>
-//               Hello, I'm
-//             </h1>
-//             <h1
-//               className="display-3 fw-bolder mb-4"
-//               style={{
-//                 color: "#FFFFFF",
-//                 textShadow: "2px 2px 4px rgba(0,0,0,0.3)",
-//               }}>
-//               {displayText}
-//               <span style={{ color: "#FFD700" }}>|</span>
-//             </h1>
-//             <p className="lead fs-5 mb-4" style={{ color: "#E3F2FD" }}>
-//               A passionate MERN Full Stack Developer with expertise in building
-//               scalable and efficient web applications.
-//             </p>
-//             <CTAButton />
-//           </div>
-//           <div className="col-md-6 text-center mt-4 mt-md-0">
-//             <ProfileImage />
-//           </div>
-//         </div>
-//       </div>
-//     </section>
-//   );
-// };
+// ==================== TYPEWRITER ====================
+const TypewriterText = ({ texts, speed = 120, delay = 1500 }) => {
+  const [displayText, setDisplayText] = useState("");
+  const [index, setIndex] = useState(0);
+  const [subIndex, setSubIndex] = useState(0);
+  const [deleting, setDeleting] = useState(false);
 
-// const CTAButton = () => {
-//   return (
-//     <a
-//       href="#experience"
-//       className="btn btn-lg mt-3 fw-bold px-4 py-2"
-//       style={{
-//         background: "linear-gradient(45deg, #FFD700, #FFC400)",
-//         color: "#0D47A1",
-//         border: "none",
-//         borderRadius: "50px",
-//         boxShadow: "0 4px 15px rgba(255, 215, 0, 0.3)",
-//         transition: "all 0.3s ease",
-//       }}
-//       onMouseOver={(e) => {
-//         e.target.style.transform = "translateY(-3px)";
-//         e.target.style.boxShadow = "0 6px 20px rgba(255, 215, 0, 0.4)";
-//       }}
-//       onMouseOut={(e) => {
-//         e.target.style.transform = "translateY(0)";
-//         e.target.style.boxShadow = "0 4px 15px rgba(255, 215, 0, 0.3)";
-//       }}>
-//       View My Work
-//     </a>
-//   );
-// };
+  useEffect(() => {
+    if (index === texts.length) setIndex(0);
 
-// const ProfileImage = () => {
-//   return (
-//     <div
-//       style={{
-//         width: "350px",
-//         height: "350px",
-//         background: "linear-gradient(135deg, #FFD700 0%, #FFC400 100%)",
-//         borderRadius: "50%",
-//         margin: "auto",
-//         display: "flex",
-//         alignItems: "center",
-//         justifyContent: "center",
-//         color: "#0D47A1",
-//         boxShadow: "0 10px 30px rgba(255, 215, 0, 0.3)",
-//         border: "5px solid rgba(255, 255, 255, 0.2)",
-//       }}>
-//       <div className="text-center">
-//         <i
-//           className="fas fa-user"
-//           style={{ fontSize: "4rem", marginBottom: "1rem" }}></i>
-//         <p className="fw-bold fs-5 m-0">Your Image Here</p>
-//       </div>
-//     </div>
-//   );
-// };
+    if (subIndex === texts[index].length + 1 && !deleting) {
+      setTimeout(() => setDeleting(true), delay);
+      return;
+    }
 
-// export default HeroSection;
-import React from "react";
+    if (subIndex === 0 && deleting) {
+      setDeleting(false);
+      setIndex((prev) => (prev + 1) % texts.length);
+      return;
+    }
 
-const HeroSection = ({ displayText }) => {
+    const timeout = setTimeout(
+      () => {
+        setSubIndex((prev) => prev + (deleting ? -1 : 1));
+      },
+      deleting ? speed / 2 : speed
+    );
+
+    setDisplayText(texts[index].substring(0, subIndex));
+    return () => clearTimeout(timeout);
+  }, [subIndex, index, deleting, texts, speed, delay]);
+
   return (
-    <section
-      id="home"
-      className="container-fluid text-white d-flex align-items-center"
-      style={{
-        minHeight: "100vh",
-        background:
-          "linear-gradient(135deg, #0A192F 0%, #112240 50%, #1E3A8A 100%)",
-        paddingTop: "80px",
-      }}>
-      <div className="container">
-        <div className="row align-items-center">
-          {/* Left Content */}
-          <div className="col-md-6 text-center text-md-start">
-            <h1
-              className="display-5 fw-semibold mb-2"
-              style={{ color: "#FBBF24", letterSpacing: "1px" }}>
-              Hello, I'm
-            </h1>
-            <h1
-              className="display-3 fw-bolder mb-3"
-              style={{
-                color: "#FFFFFF",
-                textShadow: "2px 2px 8px rgba(0,0,0,0.4)",
-                lineHeight: "1.2",
-              }}>
-              {displayText}
-              <span style={{ color: "#FBBF24" }}>|</span>
-            </h1>
-            <p
-              className="lead fs-5 mb-4"
-              style={{
-                color: "#E2E8F0",
-                maxWidth: "500px",
-                lineHeight: "1.6",
-              }}>
-              A passionate MERN Full Stack Developer who loves crafting modern,
-              scalable, and efficient web applications with clean design and
-              great user experience.
-            </p>
-            <CTAButton />
-          </div>
+    <span style={{ color: "#F59E0B" }}>
+      {displayText}
+      <span className="blinking-cursor">|</span>
+    </span>
+  );
+};
 
-          {/* Right Side Image */}
-          <div className="col-md-6 text-center mt-4 mt-md-0">
-            <ProfileImage />
+// ==================== CTA BUTTON ====================
+const CTAButton = () => (
+  <a
+    href="#experience"
+    className="btn btn-lg mt-3 fw-bold px-4 py-2"
+    style={{
+      background: "#F59E0B",
+      color: "#FFFFFF",
+      border: "none",
+      borderRadius: "50px",
+      backdropFilter: "blur(6px)",
+      boxShadow: "0 4px 20px rgba(245, 158, 11, 0.3)",
+      transition: "all 0.3s ease",
+    }}
+    onMouseOver={(e) => {
+      e.target.style.background = "#D97706";
+      e.target.style.transform = "translateY(-3px)";
+      e.target.style.boxShadow = "0 6px 25px rgba(245, 158, 11, 0.5)";
+    }}
+    onMouseOut={(e) => {
+      e.target.style.background = "#F59E0B";
+      e.target.style.transform = "translateY(0)";
+      e.target.style.boxShadow = "0 4px 20px rgba(245, 158, 11, 0.3)";
+    }}>
+    View My Work
+  </a>
+);
+
+// ==================== PROFILE IMAGE ====================
+const ProfileImage = () => (
+  <div
+    style={{
+      width: "320px",
+      height: "320px",
+      background: "linear-gradient(145deg, #FFF7E0, #FFE08A)",
+      borderRadius: "50%",
+      margin: "auto",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      color: "#1E293B",
+      boxShadow: "0 10px 40px rgba(245, 158, 11, 0.2)",
+      border: "6px solid rgba(0, 0, 0, 0.05)",
+      transition: "all 0.4s ease",
+      transform: "scale(0.9)",
+    }}
+    onMouseOver={(e) => {
+      e.currentTarget.style.transform = "scale(1.05)";
+      e.currentTarget.style.boxShadow = "0 12px 50px rgba(245, 158, 11, 0.4)";
+    }}
+    onMouseOut={(e) => {
+      e.currentTarget.style.transform = "scale(1)";
+      e.currentTarget.style.boxShadow = "0 10px 40px rgba(245, 158, 11, 0.2)";
+    }}>
+    <img
+      src={MyPhoto}
+      alt="Profile"
+      className="rounded-circle"
+      style={{
+        width: "100%",
+        height: "100%",
+        objectFit: "cover",
+        objectPosition: "-10% 30%",
+      }}
+    />
+  </div>
+);
+
+// ==================== NAV LINK ====================
+const NavLink = ({ id, label, isActive }) => (
+  <a
+    href={`#${id}`}
+    className="fw-medium text-decoration-none position-relative"
+    style={{
+      color: isActive ? "#F59E0B" : "#334155",
+      padding: "0.4rem 0.8rem",
+      fontSize: "1rem",
+      fontWeight: 500,
+      transition: "all 0.3s ease",
+    }}
+    onMouseOver={(e) => (e.target.style.color = "#F59E0B")}
+    onMouseOut={(e) =>
+      (e.target.style.color = isActive ? "#F59E0B" : "#334155")
+    }>
+    {label}
+    <span
+      style={{
+        display: "block",
+        height: "2px",
+        width: isActive ? "100%" : "0",
+        background: "#F59E0B",
+        transition: "width 0.3s ease",
+        marginTop: "4px",
+      }}></span>
+  </a>
+);
+
+// ==================== HERO SECTION (FULL) ====================
+const HeroSection = ({ displayText }) => {
+  const navItems = [
+    { id: "home", label: "Home" },
+    { id: "skills", label: "Skills" },
+    { id: "experience", label: "Experience" },
+    { id: "projects", label: "Projects" },
+    { id: "education", label: "Education" },
+    { id: "certifications", label: "Certifications" },
+  ];
+
+  const [activeSection, setActiveSection] = useState("home");
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      setIsScrolled(scrollPosition > 50);
+
+      let currentSection = "home";
+      navItems.forEach((item) => {
+        const section = document.getElementById(item.id);
+        if (section && section.offsetTop - 120 <= scrollPosition) {
+          currentSection = item.id;
+        }
+      });
+      setActiveSection(currentSection);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [navItems]);
+
+  const roles = [
+    "MERN Full Stack Developer | Problem Solver | Tech Explorer | Research & Development",
+  ];
+
+  return (
+    <>
+      {/* HEADER */}
+      <header
+        className="d-flex justify-content-between align-items-center fixed-top px-3 px-md-5"
+        style={{
+          height: isScrolled ? "9vh" : "11vh",
+          background: "rgba(255, 255, 255, 0.95)",
+          color: "#1E293B",
+          backdropFilter: "blur(12px)",
+          boxShadow: isScrolled ? "0 4px 20px rgba(0,0,0,0.1)" : "none",
+          zIndex: 1000,
+          borderRadius: isScrolled ? "12px" : "3px",
+          margin: isScrolled ? "0 5rem" : "0",
+          transition: "all 0.3s ease",
+        }}>
+        {/* Brand */}
+        <h1
+          className="m-0"
+          style={{
+            fontFamily: "Poppins, sans-serif",
+            fontWeight: 700,
+            background: "linear-gradient(45deg, #F59E0B, #FACC15)",
+            backgroundClip: "text",
+            WebkitBackgroundClip: "text",
+            color: "transparent",
+            WebkitTextFillColor: "transparent",
+            fontSize: isScrolled ? "1.4rem" : "1.8rem",
+            letterSpacing: "1px",
+            transition: "all 0.3s ease",
+            cursor: "pointer",
+          }}>
+          Portfolio
+        </h1>
+
+        {/* Navigation */}
+        <nav className="d-flex gap-3 gap-md-4">
+          {navItems.map((item) => (
+            <NavLink
+              key={item.id}
+              id={item.id}
+              label={item.label}
+              isActive={activeSection === item.id}
+            />
+          ))}
+        </nav>
+      </header>
+
+      {/* HERO CONTENT */}
+      <section
+        id="home"
+        className="container-fluid d-flex align-items-center"
+        style={{
+          minHeight: "100vh",
+          background:
+            "linear-gradient(135deg, #FFFFFF 0%, #F9FAFB 50%, #F3F4F6 100%)",
+          paddingTop: "80px",
+          color: "#1E293B",
+        }}>
+        <div className="container">
+          <div className="row align-items-center">
+            {/* Left Content */}
+            <div className="col-md-6 text-center mt-4 mt-md-0">
+              <ProfileImage />
+            </div>
+
+            {/* Right Content (UPDATED) */}
+            <div className="col-md-6 text-center text-md-start mt-4 mt-md-0">
+              <h4
+                className="fw-semibold mb-2"
+                style={{
+                  fontSize: "1.5rem",
+                  color: "#F59E0B",
+                  letterSpacing: "1px",
+                }}>
+                Hello, I'm
+              </h4>
+
+              <h1
+                className="fw-bold mb-3"
+                style={{
+                  fontSize: "2.8rem",
+                  color: "#1E293B",
+                  textShadow: "1px 1px 6px rgba(0,0,0,0.05)",
+                  lineHeight: "1.2",
+                }}>
+                {displayText}
+              </h1>
+
+              <h2
+                className="fw-medium mb-4"
+                style={{
+                  fontSize: "1.25rem",
+                  color: "#475569",
+                }}>
+                <TypewriterText texts={roles} />
+              </h2>
+
+              <CTAButton />
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-  );
-};
-
-// CTA Button with glass effect
-const CTAButton = () => {
-  return (
-    <a
-      href="#experience"
-      className="btn btn-lg mt-3 fw-bold px-4 py-2"
-      style={{
-        background: "rgba(255, 191, 36, 0.9)",
-        color: "#0A192F",
-        border: "none",
-        borderRadius: "50px",
-        backdropFilter: "blur(6px)",
-        boxShadow: "0 4px 20px rgba(251, 191, 36, 0.3)",
-        transition: "all 0.3s ease",
-      }}
-      onMouseOver={(e) => {
-        e.target.style.background = "rgba(251, 191, 36, 1)";
-        e.target.style.transform = "translateY(-3px)";
-        e.target.style.boxShadow = "0 6px 25px rgba(251, 191, 36, 0.5)";
-      }}
-      onMouseOut={(e) => {
-        e.target.style.background = "rgba(255, 191, 36, 0.9)";
-        e.target.style.transform = "translateY(0)";
-        e.target.style.boxShadow = "0 4px 20px rgba(251, 191, 36, 0.3)";
-      }}>
-      View My Work
-    </a>
-  );
-};
-
-// Circular profile image with glowing border
-const ProfileImage = () => {
-  return (
-    <div
-      style={{
-        width: "320px",
-        height: "320px",
-        background: "linear-gradient(145deg, #FBBF24, #FACC15)",
-        borderRadius: "50%",
-        margin: "auto",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        color: "#0A192F",
-        boxShadow: "0 10px 40px rgba(251, 191, 36, 0.3)",
-        border: "6px solid rgba(255, 255, 255, 0.15)",
-        transition: "all 0.4s ease",
-      }}
-      onMouseOver={(e) => {
-        e.target.style.transform = "scale(1.05)";
-        e.target.style.boxShadow = "0 12px 50px rgba(251, 191, 36, 0.5)";
-      }}
-      onMouseOut={(e) => {
-        e.target.style.transform = "scale(1)";
-        e.target.style.boxShadow = "0 10px 40px rgba(251, 191, 36, 0.3)";
-      }}>
-      <div className="text-center">
-        <i
-          className="fas fa-user"
-          style={{ fontSize: "3.5rem", marginBottom: "0.5rem" }}></i>
-        <p className="fw-bold fs-6 m-0">Your Image Here</p>
-      </div>
-    </div>
+      </section>
+    </>
   );
 };
 

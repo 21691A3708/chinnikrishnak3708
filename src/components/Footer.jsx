@@ -1,155 +1,114 @@
-// components/Footer.jsx
 import React from "react";
 
 const Footer = () => {
+  const quickLinks = [
+    { name: "Home", url: "#home" },
+    { name: "Skills", url: "#skills" },
+    { name: "Experience", url: "#experience" },
+    { name: "Projects", url: "#projects" },
+    { name: "Education", url: "#education" },
+    { name: "Certifications", url: "#certifications" },
+  ];
+
+  const contacts = [
+    {
+      icon: "fas fa-envelope",
+      content: "chinnikrishna2004krishnak@gmail.com",
+      url: "mailto:chinnikrishna2004krishnak@gmail.com",
+    },
+    {
+      icon: "fas fa-phone",
+      content: "+91 7075669476",
+      url: "tel:+917075669476",
+    },
+    {
+      icon: "fab fa-github",
+      content: "GitHub",
+      url: "https://github.com/21691A3708/",
+    },
+    {
+      icon: "fab fa-linkedin",
+      content: "LinkedIn",
+      url: "https://www.linkedin.com/in/chinnikrishna3708/",
+    },
+  ];
+
   return (
     <footer
-      className="pt-5 pb-4"
+      className="py-3"
       style={{ backgroundColor: "#0D47A1", color: "white" }}>
-      <div className="container text-center text-md-left">
-        <FooterContent />
-        <FooterDivider />
-        <FooterCopyright />
+      <div className="container text-center">
+        {/* Brand */}
+        <h6 className="fw-bold mb-2" style={{ color: "#FFD700" }}>
+          Kundharupu Chinni Krishna
+        </h6>
+
+        {/* Quick Links */}
+        <div className="mb-2">
+          {quickLinks.map((link, idx) => (
+            <a
+              key={idx}
+              href={link.url}
+              className="text-white text-decoration-none mx-2"
+              style={{ fontSize: "0.9rem", transition: "color 0.3s ease" }}
+              onMouseOver={(e) => (e.target.style.color = "#FFD700")}
+              onMouseOut={(e) => (e.target.style.color = "white")}>
+              {link.name}
+            </a>
+          ))}
+        </div>
+
+        {/* Contact Icons */}
+        <div className="mb-2">
+          {contacts.map((c, idx) => (
+            <a
+              key={idx}
+              href={c.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white mx-2"
+              style={{ fontSize: "1rem", transition: "color 0.3s ease" }}
+              onMouseOver={(e) => (e.target.style.color = "#FFD700")}
+              onMouseOut={(e) => (e.target.style.color = "white")}>
+              <i className={c.icon}></i>
+            </a>
+          ))}
+        </div>
+
+        {/* Copyright */}
+        <p style={{ fontSize: "0.8rem", color: "#E3F2FD", margin: 0 }}>
+          © 2025 | Built by{" "}
+          <span style={{ color: "#FFD700", fontWeight: 600 }}>
+            Kundharupu Chinni Krishna
+          </span>
+        </p>
       </div>
     </footer>
   );
 };
 
-const FooterContent = () => {
-  const quickLinks = [
-    "Home",
-    "Skills",
-    "Experience",
-    "Projects",
-    "Education",
-    "Certifications",
-  ];
-
-  return (
-    <div className="row text-center text-md-left">
-      <div className="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-        <h5
-          className="text-uppercase mb-4 font-weight-bold"
-          style={{ color: "#FFD700" }}>
-          Kundharupu Chinni Krishna
-        </h5>
-        <p style={{ color: "#E3F2FD" }}>
-          A passionate MERN stack developer dedicated to building innovative and
-          efficient web solutions.
-        </p>
-      </div>
-
-      <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-        <h5
-          className="text-uppercase mb-4 font-weight-bold"
-          style={{ color: "#FFD700" }}>
-          Quick Links
-        </h5>
-        {quickLinks.map((link) => (
-          <FooterLink key={link} link={link} />
-        ))}
-      </div>
-
-      <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-        <ContactInfo />
-      </div>
-    </div>
-  );
-};
-
-const FooterLink = ({ link }) => {
-  return (
-    <p>
-      <a
-        href={`#${link.toLowerCase()}`}
-        className="text-white text-decoration-none"
-        style={{ transition: "color 0.3s ease" }}
-        onMouseOver={(e) => (e.target.style.color = "#FFD700")}
-        onMouseOut={(e) => (e.target.style.color = "white")}>
-        {link}
-      </a>
-    </p>
-  );
-};
-
-const ContactInfo = () => {
-  const contacts = [
-    {
-      icon: "fas fa-envelope mr-3",
-      content: "chinnikrishna2004krishnak@gmail.com",
-      isLink: false,
-    },
-    {
-      icon: "fas fa-phone mr-3",
-      content: "+91 7075669476",
-      isLink: false,
-    },
-    {
-      icon: "fab fa-github mr-3",
-      content: "GitHub",
-      url: "https://github.com/21691A3708/",
-      isLink: true,
-    },
-    {
-      icon: "fab fa-linkedin mr-3",
-      content: "LinkedIn",
-      url: "https://www.linkedin.com/in/chinnikrishna3708/",
-      isLink: true,
-    },
-  ];
-
-  return (
-    <>
-      <h5
-        className="text-uppercase mb-4 font-weight-bold"
-        style={{ color: "#FFD700" }}>
-        Contact Me
-      </h5>
-      {contacts.map((contact, index) => (
-        <ContactItem key={index} contact={contact} />
-      ))}
-    </>
-  );
-};
-
-const ContactItem = ({ contact }) => {
-  if (contact.isLink) {
-    return (
-      <p>
-        <a
-          href={contact.url}
-          className="text-white text-decoration-none"
-          style={{ transition: "color 0.3s ease" }}
-          onMouseOver={(e) => (e.target.style.color = "#FFD700")}
-          onMouseOut={(e) => (e.target.style.color = "white")}>
-          <i className={contact.icon} style={{ color: "#FFD700" }}></i>{" "}
-          {contact.content}
-        </a>
-      </p>
-    );
-  }
-
-  return (
-    <p>
-      <i className={contact.icon} style={{ color: "#FFD700" }}></i>
-      <span style={{ color: "#E3F2FD" }}>{contact.content}</span>
-    </p>
-  );
-};
-
-const FooterDivider = () => (
-  <hr style={{ borderColor: "#1976D2", margin: "2rem 0" }} />
-);
-
-const FooterCopyright = () => (
-  <div className="row align-items-center">
-    <div className="col-md-7 col-lg-8">
-      <p style={{ color: "#E3F2FD" }}>
-        &copy; 2025 All rights reserved by:{" "}
-        <strong style={{ color: "#FFD700" }}>Kundharupu Chinni Krishna</strong>
-      </p>
-    </div>
-  </div>
-);
-
 export default Footer;
+// import React from "react";
+
+// const Footer = () => {
+//   return (
+//     <footer
+//       className="py-3"
+//       style={{ backgroundColor: "#0D47A1", color: "white" }}
+//     >
+//       <div className="container text-center">
+//         <h6 className="fw-bold mb-2" style={{ color: "#FFD700" }}>
+//           Kundharupu Chinni Krishna
+//         </h6>
+//         <p style={{ fontSize: "0.8rem", color: "#E3F2FD", margin: 0 }}>
+//           © 2025 | Built with ❤️ by{" "}
+//           <span style={{ color: "#FFD700", fontWeight: 600 }}>
+//             Kundharupu Chinni Krishna
+//           </span>
+//         </p>
+//       </div>
+//     </footer>
+//   );
+// };
+
+// export default Footer;
