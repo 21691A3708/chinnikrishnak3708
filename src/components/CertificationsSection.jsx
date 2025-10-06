@@ -12,40 +12,44 @@ const CertificationsSection = () => {
       issuer: "VCreatech PVT LTD | MMRFIC",
       year: "2025",
       icon: "fas fa-laptop-code",
-      color: "#0D47A1",
+      color: "#0D47A1", // Deep Blue
+      bgColor: "#E3F2FD", // Light Blue
       certificateImage: Mern,
       details:
-        "Completed internship in MERN stack development, building full stack web applications.",
+        "Completed internship in MERN stack development, building full stack web applications with MongoDB, Express.js, React.js, and Node.js.",
     },
     {
       title: "Cybersecurity Essentials",
       issuer: "CISCO",
       year: "2024",
       icon: "fas fa-shield-alt",
-      color: "#FF6B35",
+      color: "#D32F2F", // Deep Red
+      bgColor: "#FFEBEE", // Light Red
       certificateImage: Cybersecurity,
       details:
-        "Completed Cisco Cybersecurity Essentials covering fundamental cybersecurity concepts.",
+        "Completed Cisco Cybersecurity Essentials covering fundamental cybersecurity concepts, network security, and threat protection methodologies.",
     },
     {
       title: "Privacy and Security in Online Social Media",
       issuer: "NPTEL",
       year: "2024",
       icon: "fas fa-lock",
-      color: "#00B4D8",
+      color: "#00796B", // Teal Green
+      bgColor: "#E0F2F1", // Light Teal
       certificateImage: Privacy,
       details:
-        "Completed course on online privacy and security measures in social media platforms.",
+        "Completed advanced course on online privacy, security measures, and data protection strategies in social media platforms.",
     },
     {
       title: "Business Analytics & Text Mining Modelling using Python",
       issuer: "NPTEL",
       year: "2024",
       icon: "fas fa-chart-line",
-      color: "#7209B7",
+      color: "#5D4037", // Brown
+      bgColor: "#EFEBE9", // Light Brown
       certificateImage: Business,
       details:
-        "Learned Business Analytics & Text Mining Modelling using Python with practical projects.",
+        "Mastered Business Analytics & Text Mining Modelling using Python with practical projects and data analysis techniques.",
     },
   ];
 
@@ -127,7 +131,7 @@ const CertificationsSection = () => {
                   borderRadius: "50%",
                   background: "white",
                   border: "2px solid #E2E8F0",
-                  color: "#F59E0B",
+                  color: "#0D47A1",
                   fontSize: "1.2rem",
                   zIndex: 10,
                   left: "-25px",
@@ -135,14 +139,14 @@ const CertificationsSection = () => {
                   transition: "all 0.3s ease",
                 }}
                 onMouseEnter={(e) => {
-                  e.target.style.background = "#F59E0B";
+                  e.target.style.background = "#0D47A1";
                   e.target.style.color = "white";
-                  e.target.style.borderColor = "#F59E0B";
+                  e.target.style.borderColor = "#0D47A1";
                   e.target.style.transform = "scale(1.1)";
                 }}
                 onMouseLeave={(e) => {
                   e.target.style.background = "white";
-                  e.target.style.color = "#F59E0B";
+                  e.target.style.color = "#0D47A1";
                   e.target.style.borderColor = "#E2E8F0";
                   e.target.style.transform = "scale(1)";
                 }}>
@@ -158,7 +162,7 @@ const CertificationsSection = () => {
                   borderRadius: "50%",
                   background: "white",
                   border: "2px solid #E2E8F0",
-                  color: "#F59E0B",
+                  color: "#0D47A1",
                   fontSize: "1.2rem",
                   zIndex: 10,
                   right: "-25px",
@@ -166,14 +170,14 @@ const CertificationsSection = () => {
                   transition: "all 0.3s ease",
                 }}
                 onMouseEnter={(e) => {
-                  e.target.style.background = "#F59E0B";
+                  e.target.style.background = "#0D47A1";
                   e.target.style.color = "white";
-                  e.target.style.borderColor = "#F59E0B";
+                  e.target.style.borderColor = "#0D47A1";
                   e.target.style.transform = "scale(1.1)";
                 }}
                 onMouseLeave={(e) => {
                   e.target.style.background = "white";
-                  e.target.style.color = "#F59E0B";
+                  e.target.style.color = "#0D47A1";
                   e.target.style.borderColor = "#E2E8F0";
                   e.target.style.transform = "scale(1)";
                 }}>
@@ -189,8 +193,6 @@ const CertificationsSection = () => {
                 key={idx}
                 className="col-12 col-sm-6 col-md-4 col-lg-3"
                 style={{ minHeight: "280px" }}>
-                {" "}
-                {/* Reduced from 380px */}
                 <CertificationCard
                   certification={cert}
                   onClick={() => setSelectedCert(cert)}
@@ -212,9 +214,20 @@ const CertificationsSection = () => {
                   borderRadius: "50%",
                   background: "white",
                   border: "2px solid #E2E8F0",
-                  color: "#F59E0B",
+                  color: "#0D47A1",
                   fontSize: "1rem",
                   boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+                  transition: "all 0.3s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.background = "#0D47A1";
+                  e.target.style.color = "white";
+                  e.target.style.borderColor = "#0D47A1";
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.background = "white";
+                  e.target.style.color = "#0D47A1";
+                  e.target.style.borderColor = "#E2E8F0";
                 }}>
                 ‹
               </button>
@@ -231,7 +244,7 @@ const CertificationsSection = () => {
                       height: "12px",
                       borderRadius: "50%",
                       backgroundColor:
-                        currentSlide === index ? "#F59E0B" : "#CBD5E1",
+                        currentSlide === index ? "#0D47A1" : "#CBD5E1",
                       transition: "all 0.3s ease",
                       transform:
                         currentSlide === index ? "scale(1.2)" : "scale(1)",
@@ -250,9 +263,20 @@ const CertificationsSection = () => {
                   borderRadius: "50%",
                   background: "white",
                   border: "2px solid #E2E8F0",
-                  color: "#F59E0B",
+                  color: "#0D47A1",
                   fontSize: "1rem",
                   boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+                  transition: "all 0.3s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.background = "#0D47A1";
+                  e.target.style.color = "white";
+                  e.target.style.borderColor = "#0D47A1";
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.background = "white";
+                  e.target.style.color = "#0D47A1";
+                  e.target.style.borderColor = "#E2E8F0";
                 }}>
                 ›
               </button>
@@ -306,7 +330,7 @@ const CertificationsSection = () => {
                 transition: "all 0.3s ease",
               }}
               onMouseEnter={(e) => {
-                e.target.style.background = "#F59E0B";
+                e.target.style.background = "#0D47A1";
                 e.target.style.color = "white";
               }}
               onMouseLeave={(e) => {
@@ -320,8 +344,9 @@ const CertificationsSection = () => {
             <div
               className="d-flex justify-content-center align-items-center p-4"
               style={{
-                background: "linear-gradient(135deg, #F8FAFC, #F1F5F9)",
+                background: selectedCert.bgColor,
                 minHeight: "300px",
+                transition: "all 0.3s ease",
               }}>
               <img
                 src={selectedCert.certificateImage}
@@ -422,15 +447,19 @@ const CertificationCard = ({ certification, onClick }) => (
       transition: "all 0.3s ease",
       overflow: "hidden",
       background: "linear-gradient(135deg, #FFFFFF, #F8FAFC)",
-      height: "280px", // Fixed height for consistency
+      height: "280px",
+      border: `1px solid ${certification.bgColor}`,
     }}
     onMouseEnter={(e) => {
       e.currentTarget.style.transform = "translateY(-8px)";
       e.currentTarget.style.boxShadow = "0 15px 40px rgba(0,0,0,0.15)";
+      e.currentTarget.style.background = certification.bgColor;
     }}
     onMouseLeave={(e) => {
       e.currentTarget.style.transform = "translateY(0)";
       e.currentTarget.style.boxShadow = "0 4px 20px rgba(0,0,0,0.08)";
+      e.currentTarget.style.background =
+        "linear-gradient(135deg, #FFFFFF, #F8FAFC)";
     }}>
     {/* Color Accent */}
     <div
@@ -442,16 +471,16 @@ const CertificationCard = ({ certification, onClick }) => (
     />
 
     <div className="card-body d-flex flex-column justify-content-between p-3">
-      {" "}
-      {/* Reduced padding */}
       {/* Icon */}
       <div className="text-center mb-2">
-        {" "}
-        {/* Reduced margin */}
         <i
           className={`${certification.icon} fa-2x`}
-          style={{ color: certification.color }}></i>
+          style={{
+            color: certification.color,
+            transition: "all 0.3s ease",
+          }}></i>
       </div>
+
       {/* Content */}
       <div className="text-center flex-grow-1 d-flex flex-column justify-content-center">
         <h6
@@ -459,35 +488,37 @@ const CertificationCard = ({ certification, onClick }) => (
           style={{
             color: "#1E293B",
             lineHeight: "1.3",
-            fontSize: "0.9rem", // Slightly smaller font
-            minHeight: "2.2rem", // Reduced min-height
+            fontSize: "0.9rem",
+            minHeight: "2.2rem",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            transition: "all 0.3s ease",
           }}>
           {certification.title}
         </h6>
         <p
-          className="text-muted mb-2 small"
+          className="mb-2 small"
           style={{
             color: "#64748B",
-            fontSize: "0.8rem", // Smaller font for issuer
+            fontSize: "0.8rem",
             lineHeight: "1.2",
+            transition: "all 0.3s ease",
           }}>
           {certification.issuer}
         </p>
       </div>
+
       {/* Year Badge */}
       <div className="text-center mt-2">
-        {" "}
-        {/* Reduced margin */}
         <span
           className="badge fw-semibold"
           style={{
             background: certification.color,
             color: "white",
-            fontSize: "0.7rem", // Smaller badge
+            fontSize: "0.7rem",
             padding: "0.25rem 0.6rem",
+            transition: "all 0.3s ease",
           }}>
           {certification.year}
         </span>
